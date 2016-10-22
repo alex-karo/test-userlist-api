@@ -10,9 +10,12 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 Route::get('/', function () {
-    return view('welcome');
+    $readmeContent = File::get(base_path() . '/README.md');
+    $htmlContent = Markdown::convertToHtml($readmeContent);
+    return view('welcome', ['content' => $htmlContent]);
 });
 
 Route::resource('users', 'PersonController');

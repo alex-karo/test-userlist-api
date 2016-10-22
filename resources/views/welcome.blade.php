@@ -8,69 +8,33 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=OpenSans:400,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
+                background-color: #636b6f;
+                color: #434b4f;
+                font-family: 'OpenSans', sans-serif;
+                font-weight: 400;
+                font-size: 18px;
                 margin: 0;
             }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
             .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
+                box-sizing: border-box;
+                background-color: #fff;
+                border-radius: 10px;
+                border: 3px solid #485479;
+                padding: 0 50px 30px;
+                max-width: 1200px;
+                margin: 30px auto;
             }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    Init
-                </div>
-            </div>
+        <div class="content">
+            {!! $content !!}
         </div>
     </body>
 </html>
