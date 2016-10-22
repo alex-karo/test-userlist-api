@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "herroffizier/php7"
   config.vm.network "private_network", ip: "192.168.33.115"
   config.vm.hostname = "userlist.dev"
-  config.vm.synced_folder "./app", "/var/www/app", :mount_options => ["dmode=777","fmode=666"]
+  config.vm.synced_folder ".", "/var/www/app", :mount_options => ["dmode=777","fmode=666"]
   config.vm.synced_folder "./nginx_conf", "/etc/nginx/conf.d", :mount_options => ["dmode=777","fmode=666"]
   config.vm.provision "shell", path: "vm.provision.sh"
 end
