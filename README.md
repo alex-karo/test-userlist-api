@@ -24,6 +24,7 @@
 
 ```
 git clone git@github.com:alex-karo/test-userlist-api.git
+cd test-userlist-api
 vagrant up
 ```
 После развёртывания приложения можно зайти по [адресу](http://192.168.33.115/)
