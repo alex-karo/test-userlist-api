@@ -1,0 +1,36 @@
+---
+ip: "192.168.33.115"
+memory: 512
+cpus: 1
+hostname: userlist
+name: userlist
+provider: virtualbox
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: "/home/zarza/projects/userlist"
+      to: "/home/vagrant/userlist"
+
+sites:
+    - map: userlist.dev
+      to: "/home/vagrant/userlist/public"
+
+databases:
+    - app
+
+# blackfire:
+#     - id: foo
+#       token: bar
+#       client-id: foo
+#       client-token: bar
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp
