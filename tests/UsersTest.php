@@ -8,6 +8,9 @@ class UsersTest extends TestCase
 {
     use DatabaseTransactions;
 
+    const USERS_RESOURCE = "/users";
+    const USERS_TABLE = "people";
+
     /**
      * Get data test
      *
@@ -15,18 +18,18 @@ class UsersTest extends TestCase
      */
     public function testGetData()
     {
-        $this->json('GET', '/users/')
+        $this->json('GET', self::USERS_RESOURCE)
             ->seeJsonStructure([
                 '*' => ['id', 'name']
             ]);
-        $this->json('GET', '/users/1')
+        $this->json('GET', self::USERS_RESOURCE . "/1")
             ->seeJson([
                 'id' => 1,
                 'name' => 'Mark'
             ]);
-        $this->get('/users/0')
+        $this->get(self::USERS_RESOURCE . "/0")
             ->assertResponseStatus(404);
-        $this->get('/users/who?')
+        $this->get(self::USERS_RESOURCE . "/who?")
             ->assertResponseStatus(404);
     }
 
@@ -37,39 +40,39 @@ class UsersTest extends TestCase
      */
     public function testModifyData() {
         // Add
-        $userId = $this->json('POST', '/users/', ['name' => 'Alex'])
+        $userId = $this->json('POST', self::USERS_RESOURCE . "/", ['name' => 'Alex'])
             ->assertResponseStatus(200)
             ->seeJsonStructure(['id', 'name'])
             ->decodeResponseJson()['id'];
 
         // Check
-        $this->json('GET', "/users/$userId")
+        $this->json('GET', self::USERS_RESOURCE . "/$userId")
             ->seeJson([
                 'id' => $userId,
                 'name' => 'Alex'
             ]);
-        $this->seeInDatabase('people', [
+        $this->seeInDatabase(self::USERS_TABLE, [
             'name' => 'Alex'
         ]);
 
         // Modify
-        $this->json('PATCH', "/users/$userId", ['name' => 'Peter'])
+        $this->json('PATCH', self::USERS_RESOURCE . "/$userId", ['name' => 'Peter'])
             ->assertResponseStatus(200)
             ->seeJson(['name' => 'Peter']);
 
         // Check
-        $this->json('GET', "/users/$userId")
+        $this->json('GET', self::USERS_RESOURCE . "/$userId")
             ->seeJson(['name' => 'Peter']);
-        $this->seeInDatabase('people', [
+        $this->seeInDatabase(self::USERS_TABLE, [
             'name' => 'Peter'
         ]);
 
         // Delete
-        $this->json('DELETE', "/users/$userId")
+        $this->json('DELETE', self::USERS_RESOURCE . "/$userId")
             ->assertResponseStatus(204);
 
         // Check
-        $this->get("/users/$userId")->assertResponseStatus(404);
-        $this->notSeeInDatabase('people', ['id' => $userId]);
+        $this->get(self::USERS_RESOURCE . "/$userId")->assertResponseStatus(404);
+        $this->notSeeInDatabase(self::USERS_TABLE, ['id' => $userId]);
     }
 }
